@@ -108,7 +108,7 @@ Files to modify: ```grading.c``` <br>
 Suppose that you are a grader for your favorite CSSE class. (Operating Systems, obviously!) You are working as a member of a team in order to get graded assignments out in a timely manner to students. One day, you are approached by one of the instructors you work for. Suddenly, they say: <br><br>
 "Hey, why don't we start giving our graders a designated group of students that they grade - that should make things go a lot faster, right?" <br><br>
 This begs the question -- why weren't you doing that before? <br><br>
-Anyways, you're now a couple days into the system, and assignments are going way faster than before.One downside you've noticed - the website you grade on seems to get very unstable if there are too many people on it... <br><br>
+Anyways, you're now a couple days into the system, and assignments are going way faster than before. One downside you've noticed - the website you grade on seems to get very unstable if there are too many people on it... <br><br>
 So, let's attempt to model something like this using threads in C. In ```grading.c```, I have provided you with the code to create the student and grader threads. Here are some strict requirements on what your solution must do to model this grading process: <br>
 <ol>
     <li>All of the students associated with a grader must make their submission before they can begin grading.</li>
