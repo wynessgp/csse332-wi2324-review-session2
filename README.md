@@ -100,6 +100,20 @@ The more elaborate reason why we use while loops - whenever that thread gets wok
 
 ## The Practice "Xam"
 No funny business this time with a Christmas theme, I promise. You get something worse...
+### **Problem 1: Grading** <br>
+Length: Short? <br>
+Objective: More familiarity with threads! <br>
+Files to modify: ```grading.c``` <br>
+### Description:
+Suppose that you are a grader for your favorite CSSE class. (Operating Systems, obviously!) You are working as a member of a team in order to get graded assignments out in a timely manner to students. One day, you are approached by one of the instructors you work for. Suddenly, they say: <br><br>
+"Hey, why don't we start giving our graders a designated group of students that they grade - that should make things go a lot faster, right?" <br><br>
+This begs the question -- why weren't you doing that before? <br><br>
+Anyways, you're now a couple days into the system, and assignments are going way faster than before. There is something a little odd about how the assignments are split up though - you sometimes randomly seem to get more than the other graders, sometimes less. Also, you've noticed that the website you grade on seems to get very unstable if there are too many people on it... <br><br>
+So, let's attempt to model something like this using threads in C. In ```grading.c```, I have provided you with the code to generate a psuedo-random amount of assignments for each grader to work on, and to create the student and grader threads. Here are some strict requirements on what your solution must do to model this grading process: <br>
+<ol>
+    <li>All of the students associated with a grader must make their submission before they can begin grading.</li>
+    <li>Once a grader has finished their allocated assignments, they must indicate it using the printout provided.</li>
+    <li>Only WEBSITE_MAX people (graders, students) may be on the website at any one point in time. Everyone else must wait their turn. </li>
 
 
 
