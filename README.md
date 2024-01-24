@@ -10,8 +10,9 @@ git clone git@github.com:wynessgp/CSSE332-Review-Session-2-Material.git
 ```
 That should create a copy of all of the repository's files on your WSL, inside a new folder. Like last session, I would recommend leaving the GitHub page up for the purposes of navigating the README - I've included links so you can quickly jump around.
 
-## Table of Contents
 <a id="toc"></a>
+
+## Table of Contents
 (these links will only work if you're viewing this in a markdown rendered, or on GitHub). <br>
 
 [Administrative Notes](#admin_notes) <br>
@@ -23,8 +24,9 @@ That should create a copy of all of the repository's files on your WSL, inside a
 [Problem 1](#problem_one) <br>
 [Problem 2](#problem_two) <br>
 
-## *Administrative* Notes:
 <a id="admin_notes"></a>
+
+## *Administrative* Notes:
 This github will ONLY contain the practice exam, the solutions will NOT be posted here. I've been explicitly asked not to post them here as it will make my sample solutions public. Please, reach out to me individually if you really find having the solutions would help you that much - but remember, it'll take away from the learning process if you can't get them on your own, so you'll REALLY have to pry them out of my hands. I'll give you hints, though.<br><br>
 Your second exam will have a similar format to exam 1 in terms of what days the questions are on, and the relative difficulty, but this exam will not **exclusively** be coding. Instead, your professors would like for you to think about these problems more conceptually. As far as I'm aware, the structure is as follows:
 - Day 1: Paper portion. It will likely only contain a few problems; with less of an emphasis on **exactly** correct syntax and more for understanding. You might write some psuedocode here.
@@ -43,19 +45,22 @@ man pthread_create
 
 [Back to table of contents](#toc)
 
-## *Content* Notes
 <a id="content_notes"></a>
+
+## *Content* Notes
 Threads, unlike processes, have **SHARED** global memory... more specifically, they share a code section, data section, and some OS resources (opened files, signals, etc). However, threads do happen to have unique stacks, so local variables are largely unaffected.
 
-## On Global Variables
 <a id="global_vars"></a>
+
+## On Global Variables
 This is why we have to be so cautious about how we utilize global variables. If there's a chance that another thread may need to access what your current thread is looking at, you'll need to use a lock to prevent an inconsistent state between the two separate threads. You don't want to have a thread actively updating a variable's value while another is doing a comparison with it - one should be resolved before another, otherwise you'll get incorrect behavior. So unless if you can guarantee that your threads will not overlap in **ANY** way, make sure you **LOCK!** <br><br>
 Most of the time, you will need locks. The only situation I can possibly think of where you won't need one is if you can guarantee that threads access only their own specified index within an array. The original thread can then come back and clean up the data after the child threads are done.
 
 [Back to table of contents](#toc)
 
-## On Critical Sections...
 <a id="critical_sections"></a>
+
+## On Critical Sections...
 In order to have threads really run anything in parallel, it is imperative that you **UNLOCK** as soon as you are done with any thread overhead code - that way it gives other threads an opportunity to actually run the relevant code in the **CRITICAL SECTION**. If you do not unlock, your threads will run in a serial manner as opposed to a parallel one, which is WAY slower. I have written a small example to show this off, not unlike what you guys did for max in conditional variable basics: <br><br>
 
 Properly unlocking example:
@@ -114,8 +119,9 @@ As you can see, that's an almost 4x boost to performance by properly unlocking. 
 
 [Back to table of contents](#toc)
 
-## On Signal vs. Broadcast
 <a id="sig_v_broad"></a>
+
+## On Signal vs. Broadcast
 Sometimes we will ask you to implement things that expect multiple threads to be running a specific way all at once. Think tunnel, three jobs, and the like. If you cannot guarantee exactly how many threads will be waiting in a queue, and you'd like for **MULTIPLE** of the waiting ones to start running at the same time, it is in your best interest to use *broadcast*. Even if you have multiple threads currently running, if there's any chance you might have *MORE* after this one, you should *broadcast*.<br> <br>
 In the case of ```tunnel```, think about an ambulance interrupting normal traffic flow - cars might start piling up at the EW entrance, so when that ambulance leaves, it should *broadcast* to those EW cars. (This is a bit of an oversimplifiction, but you get the point) If it alerts only one car with signal, then suddenly the EW side of the tunnel shrinks to one lane! <br><br>
 As far as signal goes, this is for a *targeted* number of threads. *Signal* itself only wakes up one thread in a queue - so if you have multiple threads running a *signal* call, you'll end up waking up however many corresponding threads. You can also have just one thread call it multiple times. <br><br>
@@ -125,17 +131,19 @@ Additionally, you should aim to use both of these calls while you still have a l
 
 [Back to table of contents](#toc)
 
-## On Waiting
 <a id="wait"></a>
+
+## On Waiting
 To make a long paragraph short: use while loops whenever you anticipate having a wait. It prevents any cases where the thread gets woken up and suddenly goes rogue, ruining every other part of your code. <br><br>
 The more elaborate reason why we use while loops - whenever that thread gets woken up from that wait statement, it'll have to re-evaluate the condition of the while loop. So if the world still isn't a better place, the thread goes back to waiting in the queue, no harm done. It provides us with a lot more flexibility when it comes to signal and broadcast, since any threads that we still don't want to run still won't run. If you don't use while loops, we will find you. 
 
 [Back to table of contents](#toc)
 
+<a id="problem_one"></a>
+
 # Practice Problems
 No funny business this time with a Christmas theme, I promise. You get something worse...
 ## **Problem 1: [Grading](grading.c)** 
-<a id="problem_one"></a>
 Length: Medium <br>
 Objective: More familiarity with threads! <br>
 Files to modify: ```grading.c``` <br>
@@ -155,8 +163,9 @@ Something important to note: you need to be careful to avoid starvation here - y
 
 [Back to table of contents](#toc)
 
-## **Problem 2: [The Classroom](classroom.c)** 
 <a id="problem_two"></a>
+
+## **Problem 2: [The Classroom](classroom.c)** 
 Length: Long <br>
 Objective: More practice! <br>
 Files to modify: ```classroom.c``` <br>
