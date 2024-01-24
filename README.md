@@ -94,6 +94,10 @@ It is important to note that these can both generate viable solutions to a probl
 An important thing to note is that these will **NOT** error if there are no threads waiting in a queue, it just simply won't wake anyone up. <br><br> 
 Additionally, you should aim to use both of these calls while you still have a lock. Why? Most of the time a program will still have correct behavior regardless if you signal while locked or unlocked, but if you want to 100% guarantee correctness, it is **safer** to use broadcast and signal while you are holding a lock, that way you know which thread is actually doing the signal or broadcast. I'm fairly certain this is what Mohammad and Hays expect from you, so you might as well do it!
 
+## On Waiting
+To make a long paragraph short: use while loops whenever you anticipate having a wait. It prevents any cases where the thread gets woken up and suddenly goes rogue, ruining every other part of your code. <br><br>
+The more elaborate reason why we use while loops - whenever that thread gets woken up from that wait statement, it'll have to re-evaluate the condition of the while loop. So if the world still isn't a better place, the thread goes back to waiting in the queue, no harm done. It provides us with a lot more flexibility when it comes to signal and broadcast, since any threads that we still don't want to run still won't run. If you don't use while loops, we will find you. 
+
 ## The Practice "Xam"
 No funny business this time with a Christmas theme, I promise. You get something worse...
 
