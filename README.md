@@ -98,22 +98,61 @@ Additionally, you should aim to use both of these calls while you still have a l
 To make a long paragraph short: use while loops whenever you anticipate having a wait. It prevents any cases where the thread gets woken up and suddenly goes rogue, ruining every other part of your code. <br><br>
 The more elaborate reason why we use while loops - whenever that thread gets woken up from that wait statement, it'll have to re-evaluate the condition of the while loop. So if the world still isn't a better place, the thread goes back to waiting in the queue, no harm done. It provides us with a lot more flexibility when it comes to signal and broadcast, since any threads that we still don't want to run still won't run. If you don't use while loops, we will find you. 
 
-## The Practice "Xam"
+## Practice Problems
 No funny business this time with a Christmas theme, I promise. You get something worse...
-### **Problem 1: Grading** <br>
-Length: Short? <br>
+### **Problem 1: Grading** 
+Length: Medium <br>
 Objective: More familiarity with threads! <br>
 Files to modify: ```grading.c``` <br>
 ### Description:
 Suppose that you are a grader for your favorite CSSE class. (Operating Systems, obviously!) You are working as a member of a team in order to get graded assignments out in a timely manner to students. One day, you are approached by one of the instructors you work for. Suddenly, they say: <br><br>
 "Hey, why don't we start giving our graders a designated group of students that they grade - that should make things go a lot faster, right?" <br><br>
 This begs the question -- why weren't you doing that before? <br><br>
-Anyways, you're now a couple days into the system, and assignments are going way faster than before. There is something a little odd about how the assignments are split up though - you sometimes randomly seem to get more than the other graders, sometimes less. Also, you've noticed that the website you grade on seems to get very unstable if there are too many people on it... <br><br>
-So, let's attempt to model something like this using threads in C. In ```grading.c```, I have provided you with the code to generate a psuedo-random amount of assignments for each grader to work on, and to create the student and grader threads. Here are some strict requirements on what your solution must do to model this grading process: <br>
+Anyways, you're now a couple days into the system, and assignments are going way faster than before.One downside you've noticed - the website you grade on seems to get very unstable if there are too many people on it... <br><br>
+So, let's attempt to model something like this using threads in C. In ```grading.c```, I have provided you with the code to create the student and grader threads. Here are some strict requirements on what your solution must do to model this grading process: <br>
 <ol>
     <li>All of the students associated with a grader must make their submission before they can begin grading.</li>
     <li>Once a grader has finished their allocated assignments, they must indicate it using the printout provided.</li>
     <li>Only WEBSITE_MAX people (graders, students) may be on the website at any one point in time. Everyone else must wait their turn. </li>
+    <li>In the case that there are more graders than the WEBSITE_MAX allows, they should alternate who's on the website. (i.e, everyone should get a turn)</li>
+</ol>
+Something important to note: you need to be careful to avoid starvation here - you are not guaranteed that all of the graders arrive before all of the students make their submissions, nor are you guaranteed that all of the students will have made a submission before all of the graders arrive.
+
+### **Problem 2: The Classroom** 
+Length: Long <br>
+Objective: More practice! <br>
+Files to modify: ```classroom.c``` <br>
+### Description:
+Suppose that in a weird alternate Rose-Hulman, students can only enter a classroom once a professor has already entered. Additionally, suppose that each class is always taught by two professors, one ME, and one CS. (What a weird combo!) <br><br>
+Diverting even further from reality, let's suppose that these classes the professors are teaching have no set roster. So you could have 18 students one day, and a completely unique set of 24 students the next day. Additionally, suppose that all of the classes taught in this classroom are the exact same (so no constraints on what students can enter or not). <br><br>
+Some additional quirks: you are not guaranteed that every CS and ME professor shows up on every given day, so some days, a couple of CS and ME professors have to leave, having not taught a class. If it's time for their class to start and there isn't the other type of professor available, they leave. <br><br>
+Finally, there is still a max student capacity on the classroom. Students will file in until they reach the max capacity, and once it is reached, everyone else must wait until the next instance of the class is offered. Once the class starts, no more students should be able to enter. If all of the professors for the day have arrived and some students still haven't been able to attend a class, they will leave, unhappy. <br><br>
+Also, if professors arrive and another group is already teaching, they must wait until the current group is done, and the students leave. They will only check to see if a professor of the other type is *available* once they get the opportunity to *enter* the classroom. <br><br>
+As such, there's quite a few requirements here on your solution in order to get things working properly: <br>
+<ol>
+    <li>All print statements about professors entering a classroom must have an accompanying one of the other professor's type.</li>
+    <li>Students should only enter the classroom if a professor does.</li>
+    <li>If a professor cannot find an accompanying professor by the time they go to teach, they need to leave.</li>
+    <li>No professor should leave the classroom until all of the students in the classroom do.</li>
+    <li>If all of the professors have taught for the day and there are students left over, they should leave.</li>
+    <li>There doesn't need to be a full class's worth of students waiting to start the class.</li>
+</ol>
+A small hint to help with what I deem to be the hardest requirement - the last one: <br> <br>
+It is sufficient to have whoever is alerting the other professor also alert all of the waiting students that "hey, this class is starting". If there is more than the max capacity waiting, that's OK, but if there's less, that's also OK. <br><br>
+This leads to a weird case where there might be 0 students waiting, but given all of the other constraints I've given you, I'd say that's OK. <br><br>
+
+Also, your professor thread specific code might look very different from the traditional style here. Don't worry about it too much, as long as it's not "hacky". 
+
+### **Problem 3: Office Hours** 
+Length: Short <br>
+Objective: Be familiar in a situation which doesn't require locks! <br>
+Files to modify: ```office_hours.c``` <br>
+### Description:
+
+
+
+
+
 
 
 
