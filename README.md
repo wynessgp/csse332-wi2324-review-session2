@@ -142,6 +142,7 @@ The more elaborate reason why we use while loops - whenever that thread gets wok
 <a id="problem_one"></a>
 
 # Practice Problems
+I've provided a makefile for all of the problems on this exam, you can generate the necessary binaries by simply typing ```make``` while in the correct directory. <br><br>
 No funny business this time with a Christmas theme, I promise. You get something worse...
 ## **Problem 1: [Grading](grading.c)** 
 Length: Medium <br>
