@@ -3,10 +3,10 @@ all: grading.bin classroom.bin
 # no dependencies here
 
 grading.bin: grading.c
-	gcc grading.c -o grading.bin
+	gcc -pthread -o grading.bin grading.c
 
 classroom.bin: classroom.c
-	gcc classroom.c -o classroom.bin
+	gcc -pthread -o classroom.bin classroom.c
 
 # no need to run this, but it'll clear out any .bin files
 clean:
