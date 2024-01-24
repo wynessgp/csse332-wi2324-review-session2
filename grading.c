@@ -45,6 +45,7 @@ void* grader(void* args) {
     printf("Grader (%d) for section %d has arrived!\n", grader_info->thread_num, 
                                                         grader_info->section_num);
 
+    // CRITICAL SECTION
     printf("Grader (%d) is grading an assignment!\n", grader_info->thread_num);
     // sleep for a random amount of time between 1-4 seconds to ensure your solution is correct
     sleep((rand() % 4) + 1);

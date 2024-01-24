@@ -141,13 +141,9 @@ A small hint to help with what I deem to be the hardest requirement - the last o
 It is sufficient to have whoever is alerting the other professor also alert all of the waiting students that "hey, this class is starting". If there is more than the max capacity waiting, that's OK, but if there's less, that's also OK. <br><br>
 This leads to a weird case where there might be 0 students waiting, but given all of the other constraints I've given you, I'd say that's OK. <br><br>
 
-Also, your professor thread specific code might look very different from the traditional style here. Don't worry about it too much, as long as it's not "hacky". 
+Also, your professor thread specific code might look very different from the traditional style here. Don't worry about it too much, as long as it's not "hacky". <br><br>
+The thread numbers will be a little crazy on this one due to some randomization I used. Don't worry about it.
 
-### **Problem 3: Office Hours** 
-Length: Short <br>
-Objective: Be familiar in a situation which doesn't require locks! <br>
-Files to modify: ```office_hours.c``` <br>
-### Description:
 
 
 
