@@ -61,6 +61,10 @@ int main(int argc, char** argv) {
     srand(time(NULL));
 
     printf("Grading program started!\n");
+    // should be as simple as this.
+    assignments_per_grader = NUM_STUDENTS / NUM_GRADERS;
+    // if you modify how many students & graders you have, you are 
+    // responsible for modifying the above line as well!
 
     // create all of the students
     for (int i = 0; i < NUM_STUDENTS; i++) {
