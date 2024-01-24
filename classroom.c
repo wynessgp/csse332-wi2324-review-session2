@@ -50,8 +50,12 @@ void* professor(void* tid) {
     printf("Professor (%d) of type %s is entering the classroom...\n", prof_num, 
                                                   professor_types[prof_num % 2]);
     sleep(2);
-    printf("Professor (%d) of type %s is leaving the classroom...\n", prof_num,
+    printf("Professor (%d) of type %s is waiting for students to leave the classroom...\n", prof_num,
                                                   professor_types[prof_num % 2]);
+    
+    // you'll need to print this once the professor leaves the classroom
+    // printf("Professor (%d) of type %s is leaving the classroom...\n", prof_num,
+    //                                              professor_types[prof_num % 2]);
 
     // You'll need to print this in the case a professor leaves:
     // printf("Professor (%d) left because they couldn't find an accomplice!\n", prof_num);
