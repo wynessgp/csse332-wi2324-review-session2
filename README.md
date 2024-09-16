@@ -6,7 +6,7 @@ mkdir <dir name>
 ```
 Once you are done with that, go ahead and cd into that directory. You'll then want to clone this repository into that new directory by running:
 ```
-git clone git@github.com:wynessgp/CSSE332-Review-Session-2-Material.git
+git clone git@github.com:wynessgp/csse332-wi2324-review-session2.git
 ```
 That should create a copy of all of the repository's files on your WSL, inside a new folder. Like last session, I would recommend leaving the GitHub page up for the purposes of navigating the README - I've included links so you can quickly jump around.
 
